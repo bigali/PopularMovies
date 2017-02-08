@@ -1,9 +1,16 @@
 package com.sidali.popularmovies.utils;
 
+import android.support.v7.widget.RecyclerView;
+
+/*
+    from : http://github.com/codepath/android_guides/wiki/Endless-Scrolling-withAdapterViews-and-RecyclerView
+*/
+
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+
 
 public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
     // The minimum amount of items to have below your current scroll position
