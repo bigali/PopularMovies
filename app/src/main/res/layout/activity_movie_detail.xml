@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_movie_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.sidali.popularmovies.MovieDetailActivity">
+    <LinearLayout
+        android:id="@+id/movie_title"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_vertical"
+        android:background="#009688"
+        android:elevation="4dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textSize="32sp"
+            android:textColor="#ffffff"
+            android:id="@+id/tv_title" />
+    </LinearLayout>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/details"
+        android:layout_below="@id/movie_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginBottom="16dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/img" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/year"
+            android:layout_marginStart="56dp"
+            app:layout_constraintLeft_toRightOf="@+id/img"
+            android:layout_marginLeft="56dp"
+            android:textColor="@color/textColor"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/duration"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+            android:layout_marginStart="56dp"
+            app:layout_constraintLeft_toRightOf="@+id/img"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/year"
+            android:textStyle="normal|italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mark"
+            android:textColor="@android:color/black"
+            android:layout_marginStart="56dp"
+            app:layout_constraintLeft_toRightOf="@+id/img"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/duration" />
+
+        <Button
+            android:id="@+id/mark_favorite"
+            android:text="MARK AS FAVOURITE"
+            app:layout_constraintLeft_toRightOf="@+id/img"
+            app:layout_constraintTop_toBottomOf="@+id/mark"
+            android:layout_marginStart="56dp"
+            android:layout_marginLeft="56dp"
+            android:background="?android:attr/textColorLink"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            android:layout_width="88dp"
+            android:layout_height="48dp" />
+
+    </android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/overview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/details"
+        android:textColor="@color/textColor"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
+
+
+</RelativeLayout>

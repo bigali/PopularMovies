@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">Popular Movies</string>
+    <string name="app_name">Pop Movies</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+
+
+
+    <string-array name="pref_order_list_titles">
+        <item>Popular</item>
+        <item>Most rated</item>
+    </string-array>
+    <string-array name="pref_order_list_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>
