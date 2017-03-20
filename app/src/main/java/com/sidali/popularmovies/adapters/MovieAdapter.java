@@ -38,7 +38,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     @Override
     public MovieAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_row,parent,false);
-
         return new MyViewHolder(view);
     }
 
@@ -51,7 +50,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
                 Intent intent = new Intent(v.getContext(),MovieDetailActivity.class);
                 intent.putExtra("id",movies.get(position).getId());
                 v.getContext().startActivity(intent);
-
             }
         });
     }
@@ -69,8 +67,5 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             img = (ImageView) itemView.findViewById(R.id.img);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
         }
-
-
-
     }
 }

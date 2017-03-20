@@ -3,15 +3,23 @@ package com.sidali.popularmovies;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sidali.popularmovies.adapters.TrailerAdapter;
 import com.sidali.popularmovies.api.MoviesApi;
+import com.sidali.popularmovies.api.TrailersApi;
 import com.sidali.popularmovies.model.MovieDetail;
+import com.sidali.popularmovies.model.Trailer;
+import com.sidali.popularmovies.model.TrailersList;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,9 +45,20 @@ public class MovieDetailActivity extends AppCompatActivity implements Callback<M
     TextView tv_mark;
     @BindView(img)
     ImageView im_img;
+
+    @BindView(R.id.lv_trailers)
+    RecyclerView rvTrailers;
+    private List<Trailer> trailers=new ArrayList<>();
+    private TrailerAdapter trailerAdapter;
+
     ProgressDialog mProgressDialog;
 
     Integer id;
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("http://api.themoviedb.org/3/movie/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +74,22 @@ public class MovieDetailActivity extends AppCompatActivity implements Callback<M
         mProgressDialog.show();
         id=getIntent().getIntExtra("id",0);
         callMovieDetail(id.toString());
+        callTrailers(id.toString());
 
 
 
 
     }
 
+    private void callTrailers(String id) {
+        TrailersApi trailersApi = retrofit.create(TrailersApi.class);
+        Call<TrailersList> call = trailersApi.getTrailers(id);
+        call.enqueue(this);
+
+    }
+
     private void callMovieDetail(String id) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.themoviedb.org/3/movie/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+
 
         // prepare call in Retrofit 2.0
         MoviesApi moviesApi = retrofit.create(MoviesApi.class);
