@@ -23,10 +23,6 @@ public class FavouritesContract {
         public static final String COLUMN_MOVIE_ID = "movieId";
         public static final String COLUMN_MOVIE_POSTER_PATH="moviePosterPath";
 
-        public static Uri buildFavouriteMoviesUri() {
-            return CONTENT_URI.buildUpon()
-                    .build();
-        }
 
     }
 }

@@ -79,17 +79,14 @@ public class FavouritesContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-// Get access to the task database (to write new data to)
         final SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        // Write URI matching code to identify the match for the tasks directory
         int match = sUriMatcher.match(uri);
-        Uri returnUri; // URI to be returned
+        Uri returnUri;
 
         switch (match) {
             case FAVOUTITES:
-                // Insert new values into the database
-                // Inserting values into tasks table
+
                 long id = db.insert(TABLE_NAME, null, values);
                 if ( id > 0 ) {
                     returnUri = ContentUris.withAppendedId(FavouritesContract.FavouritesEntry.CONTENT_URI, id);
@@ -129,7 +126,6 @@ public class FavouritesContentProvider extends ContentProvider {
             getContext().getContentResolver().notifyChange(uri, null);
         }
 
-        // Return the number of tasks deleted
         return favouriteDeleted;
     }
 

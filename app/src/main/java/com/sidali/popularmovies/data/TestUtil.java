@@ -13,7 +13,6 @@ public class TestUtil {
         if(db == null){
             return;
         }
-        //create a list of fake guests
         List<ContentValues> list = new ArrayList<ContentValues>();
 
         ContentValues cv = new ContentValues();
@@ -48,7 +47,6 @@ public class TestUtil {
 
         list.add(cv);
 
-        //insert all guests in one transaction
         try
         {
             db.beginTransaction();
