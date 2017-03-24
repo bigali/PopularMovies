@@ -16,7 +16,7 @@ import static com.sidali.popularmovies.api.MoviesApi.API_KEY;
  */
 
 public interface MoviesApi {
-    String API_KEY="004d21a7d9f558a098601d09c501ab9d";
+    String API_KEY="";
 
     @GET("popular?api_key=" + API_KEY)
     Call<MoviesList> getPopularMovies();
@@ -29,6 +29,9 @@ public interface MoviesApi {
 
     @GET("top_rated?api_key=" + API_KEY)
     Call<MoviesList> loadMoreTopRatedMovies(@Query("page") int page);
+
+    @GET("{id}?api_key=" + API_KEY)
+    Call<Movie> getMovie(@Path("id") String id);
 
     @GET("{id}?api_key=" + API_KEY)
     Call<MovieDetail> getMovieDetail(@Path("id") String id);
