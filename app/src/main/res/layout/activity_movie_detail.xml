@@ -1,123 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_movie_detail"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context="com.sidali.popularmovies.MovieDetailActivity">
+    android:fitsSystemWindows="true"
+    >
 
-    <LinearLayout
-        android:id="@+id/movie_title"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/MyAppbar"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#009688"
-        android:elevation="4dp"
-        android:gravity="center_vertical">
+        android:layout_height="256dp"
+        android:fitsSystemWindows="true">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:textColor="#ffffff"
-            android:textSize="32sp" />
-    </LinearLayout>
-
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:layout_below="@id/movie_title"
-        >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/details"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapse_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:padding="8dp">
+            android:layout_height="match_parent"
+            android:background="@color/material_deep_teal_500"
+            android:fitsSystemWindows="true"
+            app:contentScrim="#ff212121"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/img"
-                android:layout_width="wrap_content"
+                android:id="@+id/bgheader"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="pin" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/MyToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="parallax" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="fill_vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@android:color/white"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            >
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:layout_marginStart="56dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/textColor"
+                    android:textSize="18sp"
+                    app:layout_constraintLeft_toRightOf="@+id/img"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:layout_marginStart="56dp"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"
+                    android:textStyle="normal|italic"
+                    app:layout_constraintLeft_toRightOf="@+id/img"
+                    app:layout_constraintTop_toBottomOf="@+id/year" />
+
+                <TextView
+                    android:id="@+id/mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:layout_marginStart="56dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintLeft_toRightOf="@+id/img"
+                    app:layout_constraintTop_toBottomOf="@+id/duration" />
+
+                <Button
+                    android:id="@+id/mark_favorite"
+                    android:layout_width="88dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="56dp"
+                    android:layout_marginStart="56dp"
+                    android:layout_marginTop="4dp"
+                    android:background="?android:attr/textColorLink"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toRightOf="@+id/img"
+                    app:layout_constraintTop_toBottomOf="@+id/mark"
+                    android:onClick="toggleFavourite"
+                    />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/overview"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/year"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/textColor" />
+            <View
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="56dp"
-                android:layout_marginStart="56dp"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/textColor"
-                android:textSize="18sp"
-                app:layout_constraintLeft_toRightOf="@+id/img"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/duration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="56dp"
-                android:layout_marginStart="56dp"
-                android:layout_marginTop="4dp"
-                android:textColor="@color/textColor"
-                android:textSize="14sp"
-                android:textStyle="normal|italic"
-                app:layout_constraintLeft_toRightOf="@+id/img"
-                app:layout_constraintTop_toBottomOf="@+id/year" />
-
-            <TextView
-                android:id="@+id/mark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="56dp"
-                android:layout_marginStart="56dp"
-                android:layout_marginTop="8dp"
-                android:textColor="@android:color/black"
-                app:layout_constraintLeft_toRightOf="@+id/img"
-                app:layout_constraintTop_toBottomOf="@+id/duration" />
-
-            <Button
-                android:id="@+id/mark_favorite"
-                android:layout_width="88dp"
-                android:layout_height="48dp"
-                android:layout_marginLeft="56dp"
-                android:layout_marginStart="56dp"
-                android:layout_marginTop="4dp"
-                android:background="?android:attr/textColorLink"
-                android:textSize="12sp"
-                app:layout_constraintLeft_toRightOf="@+id/img"
-                app:layout_constraintTop_toBottomOf="@+id/mark"
-                android:onClick="toggleFavourite"
+                android:layout_height="1dp"
+                android:background="@color/textColor"
+                android:layout_margin="16dp"
                 />
-
-
-        </android.support.constraint.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/overview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:textColor="@color/textColor" />
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:background="@color/textColor"
-            android:layout_margin="16dp"
-            />
 
 
 
@@ -125,17 +143,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
+
                 <TextView
+                    android:id="@+id/lbl_reviews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="Reviews:"
+                    android:text="@string/label_trailers"
                     android:textColor="@color/textColor"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                />
+                    android:layout_marginBottom="8dp"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/lv_trailers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     />
+                <TextView
+                    android:id="@+id/lbl_trailers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/label_reviews"
+                    android:textColor="@color/textColor"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"
+                    />
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/lv_reviews"
                     android:layout_width="match_parent"
@@ -143,31 +181,17 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:scrollbars="vertical" />
-                <TextView
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:text="Trailers:"
-                    android:textColor="@color/textColor"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/lv_trailers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:scrollbars="vertical" />
+                    android:layout_height="100dp"/>
             </LinearLayout>
 
 
 
 
-    </LinearLayout>
+        </LinearLayout>
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
 
 
-
-</RelativeLayout>

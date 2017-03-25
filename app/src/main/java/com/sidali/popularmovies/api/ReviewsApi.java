@@ -12,7 +12,7 @@ import retrofit2.http.Path;
  */
 
 public interface ReviewsApi {
-    String API_KEY="";
+    String API_KEY="004d21a7d9f558a098601d09c501ab9d";
 
     @GET("{id}/reviews?api_key=" + API_KEY)
     Call<ReviewList> getReviews(@Path("id") String id);

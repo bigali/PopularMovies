@@ -12,7 +12,7 @@ import retrofit2.http.Path;
  */
 
 public interface TrailersApi {
-    String API_KEY="";
+    String API_KEY="004d21a7d9f558a098601d09c501ab9d";
 
     @GET("{id}/videos?api_key=" + API_KEY)
     Call<TrailersList> getTrailers(@Path("id") String id);

@@ -5,12 +5,15 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,10 +59,13 @@ import static com.sidali.popularmovies.R.id.img;
 
 public class MovieDetailActivity extends AppCompatActivity {
     MovieDetail movieDetail;
-    @BindView(R.id.tv_title)
-    TextView tv_title;
+    //@BindView(R.id.tv_title) TextView tv_title;
     @BindView(R.id.year)
     TextView tv_year;
+    @BindView(R.id.lbl_reviews)
+    TextView lblReviews;
+    @BindView(R.id.lbl_trailers)
+    TextView lblTrailers;
     @BindView(R.id.duration)
     TextView tv_duration;
     @BindView(R.id.overview)
@@ -68,6 +74,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     TextView tv_mark;
     @BindView(img)
     ImageView im_img;
+    @BindView(R.id.bgheader)
+    ImageView imgHeader;
     @BindView(R.id.mark_favorite)
     Button bMarkAsFavourite;
 
@@ -76,6 +84,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.lv_trailers)
     RecyclerView rvTrailers;
+
+    CollapsingToolbarLayout collapsingToolbar;
 
     private List<Review> reviews=new ArrayList<>();
     private List<Trailer> trailers=new ArrayList<>();
@@ -114,8 +124,14 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         //client.networkInterceptors().add(new StethoInterceptor());
 
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.MyToolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("MovieDetail");
+
+
+        collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar);
+        collapsingToolbar.setTitle("My Toolbar Tittle");
         ButterKnife.bind(this);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
@@ -130,11 +146,10 @@ public class MovieDetailActivity extends AppCompatActivity {
         rvReviews.clearFocus();
 
         rvTrailers.setHasFixedSize(true);
-        RecyclerView.LayoutManager trailerslayoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager trailerslayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
         rvTrailers.setLayoutManager(trailerslayoutManager);
         trailerAdapter = new TrailerAdapter(MovieDetailActivity.this, trailers);
         rvTrailers.setAdapter(trailerAdapter);
-        rvTrailers.clearFocus();
 
 
         dbHelper= new FavouritesDbHelper(this);
@@ -165,9 +180,10 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                     reviews.clear();
                     reviews.addAll(response.body().results);
-                    if (reviews.size() < 1)
+                    if (reviews.size() < 1) {
                         rvReviews.setVisibility(View.GONE);
-                    else {
+                        lblReviews.setVisibility(View.GONE);
+                    } else {
                         rvReviews.setVisibility(View.VISIBLE);
                         ViewGroup.LayoutParams params=rvReviews.getLayoutParams();
                         params.height=ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -197,8 +213,10 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                     trailers.clear();
                     trailers.addAll(response.body().results);
-                    if (trailers.size() < 1)
+                    if (trailers.size() < 1) {
                         rvTrailers.setVisibility(View.GONE);
+                        lblTrailers.setVisibility(View.GONE);
+                    }
                     else {
                         rvTrailers.setVisibility(View.VISIBLE);
                         ViewGroup.LayoutParams params=rvTrailers.getLayoutParams();
@@ -232,7 +250,13 @@ public class MovieDetailActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     movieDetail= response.body();
                     Picasso.with(MovieDetailActivity.this).load("http://image.tmdb.org/t/p/w342/"+movieDetail.getPosterPath()).into(im_img);
-                    tv_title.setText(movieDetail.getTitle());
+                    Picasso.with(MovieDetailActivity.this).load("http://image.tmdb.org/t/p/w342/"+movieDetail.getBackdropPath()).into(imgHeader);
+
+
+                    collapsingToolbar.setTitle(movieDetail.getTitle());
+                    collapsingToolbar.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
+                    collapsingToolbar.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
+
                     tv_year.setText(movieDetail.getReleaseDate().split("-")[0]);
                     tv_duration.setText(movieDetail.getRuntime()+"min");
                     tv_overview.setText(movieDetail.getOverview());

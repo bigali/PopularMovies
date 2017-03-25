@@ -9,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.textservice.TextInfo;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sidali.popularmovies.R;
 import com.sidali.popularmovies.model.Movie;
 import com.sidali.popularmovies.model.Trailer;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +46,8 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(TrailerAdapter.MyViewHolder holder, final int position) {
-        holder.tvName.setText(trailers.get(position).getName());
+
+        Picasso.with(context).load("https://img.youtube.com/vi/"+trailers.get(position).getKey()+"/0.jpg").into(holder.ivThumbnail);
         holder.trailerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,12 +70,12 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvName;
-        public ConstraintLayout trailerLayout;
+        public ImageView ivThumbnail;
+        public RelativeLayout trailerLayout;
         public MyViewHolder(View itemView) {
             super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.tv_name);
-            trailerLayout =(ConstraintLayout) itemView.findViewById(R.id.trailers_layout);
+            ivThumbnail = (ImageView) itemView.findViewById(R.id.img_thumnail);
+            trailerLayout =(RelativeLayout) itemView.findViewById(R.id.trailers_layout);
         }
     }
 }
